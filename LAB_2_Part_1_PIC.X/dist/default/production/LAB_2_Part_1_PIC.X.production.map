@@ -4,20 +4,20 @@ Linker command line:
 
 -W-3 \
   --edf=C:\Program Files\Microchip\xc8\v3.10\pic\dat\20250813170317_en.msgs \
-  -cs -h+dist/default/debug\LAB_2_Part_1_PIC.X.debug.sym \
-  --cmf=dist/default/debug\LAB_2_Part_1_PIC.X.debug.cmf -z -Q16F883 \
-  -oC:\Users\lukeg\AppData\Local\Temp\xcAsmrw.0\driver_tmp_3.o \
+  -cs -h+dist/default/production\LAB_2_Part_1_PIC.X.production.sym \
+  --cmf=dist/default/production\LAB_2_Part_1_PIC.X.production.cmf -z \
+  -Q16F883 -oC:\Users\lukeg\AppData\Local\Temp\xcAsnjc.0\driver_tmp_3.o \
   --fixupoverflow=error -ver=XC8 PIC(R) Assembler --fixupoverflow=lstwarn \
-  -Mdist/default/debug/LAB_2_Part_1_PIC.X.debug.map -E1 -ACODE=00h-07FFhx2 \
-  -ASTRCODE=00h-0FFFh -ASTRING=00h-0FFhx16 -ACONST=00h-0FFhx16 \
-  -AENTRY=00h-0FFhx16 -ACOMMON=070h-07Fh -ABANK0=020h-06Fh \
-  -ABANK1=0A0h-0EFh -ABANK2=0120h-016Fh \
+  -Mdist/default/production/LAB_2_Part_1_PIC.X.production.map -E1 \
+  -ACODE=00h-07FFhx2 -ASTRCODE=00h-0FFFh -ASTRING=00h-0FFhx16 \
+  -ACONST=00h-0FFhx16 -AENTRY=00h-0FFhx16 -ACOMMON=070h-07Fh \
+  -ABANK0=020h-06Fh -ABANK1=0A0h-0EFh -ABANK2=0120h-016Fh \
   -ARAM=020h-06Fh,0A0h-0EFh,0120h-016Fh \
   -AABS1=020h-07Fh,0A0h-0EFh,0120h-016Fh -ASFR0=00h-01Fh -ASFR1=080h-09Fh \
   -ASFR2=0100h-011Fh -ASFR3=0180h-01EFh -ACONFIG=02007h-02008h -DCONFIG=2 \
   -AIDLOC=02000h-02003h -DIDLOC=2 -AEEDATA=00h-0FFh/02100h -DEEDATA=2 \
   -DCODE=2 -DSTRCODE=2 -DSTRING=2 -DCONST=2 -DENTRY=2 \
-  build/default/debug/main.o 
+  build/default/production/main.o 
 
 Object code version is 3.11
 
@@ -26,7 +26,7 @@ Machine type is 16F883
 
 
                 Name                               Link     Load   Length Selector   Space Scale
-build/default/debug/main.o
+build/default/production/main.o
                 config                             2007     2007        2        0       4
                 resetVect                           7FD      7FD        3      FFA       0
                 edata                                 0     2100        1     4200       3
