@@ -26,10 +26,6 @@
 ; config statements should precede project file includes.
 #include <xc.inc>
 
-; Variable Definitions 
-    count EQU 0x20               ; user RAM variabl
-    INCF count,f                 ; Incerment by that variabl    
-    
 ; Reset Vector at 0000h. Execution starts here after reset.
 PSECT resetVect,class=CODE,delta=2
 ResetVector: 

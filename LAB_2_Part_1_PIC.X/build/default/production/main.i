@@ -2341,10 +2341,6 @@ ENDM
 # 8 "C:\\Program Files\\Microchip\\xc8\\v3.10\\pic\\include/xc.inc" 2 3
 # 28 "main.S" 2
 
-; Variable Definitions
-    count EQU 0x20 ; user RAM variabl
-    INCF count,f ; Incerment by that variabl
-
 ; Reset Vector at 0000h. Execution starts here after reset.
 PSECT resetVect,class=CODE,delta=2
 ResetVector:
