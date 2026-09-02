@@ -37,11 +37,12 @@ PSECT code,class=CODE,delta=2
  
 Setup:
     ; add device setup here
+    
     BCF 0x03,6  ;set bank 0
     BCF 0x03,5  ;set bank 0
     CLRF 0x06   ;Setting PortB on reset low
     
-    BCF 0x03,6  ;set bank 1   
+    BCF 0x03,6  ;set bank 1
     BSF 0x03,5  ;set bank 1
     CLRF 0x86   ;Set PortB as an output (TRISB)
     
@@ -53,14 +54,13 @@ Setup:
     BSF 0x03,5  ;set bank 3
     CLRF 0x89   ;Setting the I/O to digital ANSELH
 
-    goto Main
-    
+    GOTO Main
     
     Main:
 	; main code goes here
 	BCF 0x03,6  ;set bank 0
-	BCF 0x03,5  ;set bank 0
-	INCF 0x06,0 ; increment PortB and place result in PortB
-	goto Main
+        BCF 0x03,5  ;set bank 0
+	INCF 0x06,1 ; increment PortB and place result in PortB
 	
+	GOTO Main
     End

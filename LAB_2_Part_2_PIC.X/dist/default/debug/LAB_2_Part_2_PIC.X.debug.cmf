@@ -59,23 +59,23 @@ STRING 19-FFF 2
 %LINETAB
 $build/default/debug/main.o
 0 resetVect CODE >32:C:\Users\lukeg\Documents\github\Lab2\LAB_2_Part_2_PIC.X\main.S
-8 code CODE >40:C:\Users\lukeg\Documents\github\Lab2\LAB_2_Part_2_PIC.X\main.S
-9 code CODE >41:C:\Users\lukeg\Documents\github\Lab2\LAB_2_Part_2_PIC.X\main.S
-A code CODE >42:C:\Users\lukeg\Documents\github\Lab2\LAB_2_Part_2_PIC.X\main.S
-B code CODE >44:C:\Users\lukeg\Documents\github\Lab2\LAB_2_Part_2_PIC.X\main.S
-C code CODE >45:C:\Users\lukeg\Documents\github\Lab2\LAB_2_Part_2_PIC.X\main.S
-D code CODE >46:C:\Users\lukeg\Documents\github\Lab2\LAB_2_Part_2_PIC.X\main.S
-E code CODE >48:C:\Users\lukeg\Documents\github\Lab2\LAB_2_Part_2_PIC.X\main.S
-F code CODE >49:C:\Users\lukeg\Documents\github\Lab2\LAB_2_Part_2_PIC.X\main.S
-10 code CODE >50:C:\Users\lukeg\Documents\github\Lab2\LAB_2_Part_2_PIC.X\main.S
-11 code CODE >52:C:\Users\lukeg\Documents\github\Lab2\LAB_2_Part_2_PIC.X\main.S
-12 code CODE >53:C:\Users\lukeg\Documents\github\Lab2\LAB_2_Part_2_PIC.X\main.S
-13 code CODE >54:C:\Users\lukeg\Documents\github\Lab2\LAB_2_Part_2_PIC.X\main.S
-14 code CODE >56:C:\Users\lukeg\Documents\github\Lab2\LAB_2_Part_2_PIC.X\main.S
+8 code CODE >41:C:\Users\lukeg\Documents\github\Lab2\LAB_2_Part_2_PIC.X\main.S
+9 code CODE >42:C:\Users\lukeg\Documents\github\Lab2\LAB_2_Part_2_PIC.X\main.S
+A code CODE >43:C:\Users\lukeg\Documents\github\Lab2\LAB_2_Part_2_PIC.X\main.S
+B code CODE >45:C:\Users\lukeg\Documents\github\Lab2\LAB_2_Part_2_PIC.X\main.S
+C code CODE >46:C:\Users\lukeg\Documents\github\Lab2\LAB_2_Part_2_PIC.X\main.S
+D code CODE >47:C:\Users\lukeg\Documents\github\Lab2\LAB_2_Part_2_PIC.X\main.S
+E code CODE >49:C:\Users\lukeg\Documents\github\Lab2\LAB_2_Part_2_PIC.X\main.S
+F code CODE >50:C:\Users\lukeg\Documents\github\Lab2\LAB_2_Part_2_PIC.X\main.S
+10 code CODE >51:C:\Users\lukeg\Documents\github\Lab2\LAB_2_Part_2_PIC.X\main.S
+11 code CODE >53:C:\Users\lukeg\Documents\github\Lab2\LAB_2_Part_2_PIC.X\main.S
+12 code CODE >54:C:\Users\lukeg\Documents\github\Lab2\LAB_2_Part_2_PIC.X\main.S
+13 code CODE >55:C:\Users\lukeg\Documents\github\Lab2\LAB_2_Part_2_PIC.X\main.S
+14 code CODE >57:C:\Users\lukeg\Documents\github\Lab2\LAB_2_Part_2_PIC.X\main.S
 15 code CODE >61:C:\Users\lukeg\Documents\github\Lab2\LAB_2_Part_2_PIC.X\main.S
 16 code CODE >62:C:\Users\lukeg\Documents\github\Lab2\LAB_2_Part_2_PIC.X\main.S
 17 code CODE >63:C:\Users\lukeg\Documents\github\Lab2\LAB_2_Part_2_PIC.X\main.S
-18 code CODE >64:C:\Users\lukeg\Documents\github\Lab2\LAB_2_Part_2_PIC.X\main.S
+18 code CODE >65:C:\Users\lukeg\Documents\github\Lab2\LAB_2_Part_2_PIC.X\main.S
 # %SYMTAB Section
 # An enumeration of all symbols in the program.
 # The beginning of the section is indicated by %SYMTAB.
