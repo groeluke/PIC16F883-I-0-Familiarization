@@ -1,7 +1,7 @@
     ; Luke Groesbeck
     ; RCET3373
     ; First Program
-    ; git url if you have one
+    ; https://github.com/groeluke/PIC16F883-I-0-Familiarization/tree/main/LAB_2_Part_1_PIC.X
     
 ; PIC16F883 Configuration Bit Settings
 

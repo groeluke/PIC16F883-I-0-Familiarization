@@ -1,7 +1,7 @@
     ; Luke Groesbeck
     ; RCET3373
     ; First Program
-    ; git url if you have one
+    ; https://github.com/groeluke/PIC16F883-I-0-Familiarization/tree/main/LAB_2_Part_2_PIC.X
     
 ; PIC16F883 Configuration Bit Settings
 
@@ -29,9 +29,6 @@
 ; Reset Vector at 0000h. Execution starts here after reset.
 PSECT resetVect,class=CODE,delta=2
 ResetVector: 
-    NOP
-    NOP
-    NOP
     goto Setup
 
 
@@ -40,18 +37,20 @@ PSECT code,class=CODE,delta=2
  
 Setup:
     ; add device setup here
-    BCF 0x03,6
-    BCF 0x03,5
+    BCF 0x03,6  ;set bank 0
+    BCF 0x03,5  ;set bank 0
     CLRF 0x06   ;Setting PortB on reset low
-    BCF 0x03,6
-    BSF 0x03,5
-    CLRF 0x86   ;Set PortB as an output
-    BCF 0x0B,0  ;Set INTCON low
-    BSF 0x03,6
-    BCF 0x03,5
-    BCF 0x09,1  ;Setting Bit 1 low for CM2CON1
-    BSF 0x03,6
-    BSF 0x03,5
+    
+    BCF 0x03,6  ;set bank 1   
+    BSF 0x03,5  ;set bank 1
+    CLRF 0x86   ;Set PortB as an output (TRISB)
+    
+    BSF 0x03,6  ;set bank 2
+    BCF 0x03,5  ;set bank 2
+    BSF 0x09,1  ;Setting Bit 1 High for CM2CON1
+    
+    BSF 0x03,6  ;set bank 3
+    BSF 0x03,5  ;set bank 3
     CLRF 0x89   ;Setting the I/O to digital ANSELH
 
     goto Main
@@ -59,9 +58,9 @@ Setup:
     
     Main:
 	; main code goes here
-	BCF 0x03,6
-	BCF 0x03,5
-	INCF 0x06,1 ; increment PortB and place result in PortB
+	BCF 0x03,6  ;set bank 0
+	BCF 0x03,5  ;set bank 0
+	INCF 0x06,0 ; increment PortB and place result in PortB
 	goto Main
 	
     End
