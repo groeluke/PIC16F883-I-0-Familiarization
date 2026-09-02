@@ -44,7 +44,7 @@ Setup:
     
     BCF 0x03,6  ;set bank 1
     BSF 0x03,5  ;set bank 1
-    CLRF 0x86   ;Set PortB as an output (TRISB)
+    CLRF 0x86   ;Set PortB as an output TRISB
     
     BSF 0x03,6  ;set bank 2
     BCF 0x03,5  ;set bank 2
