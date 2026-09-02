@@ -46,7 +46,7 @@ Setup:
     BCF 0x03,6
     BSF 0x03,5
     CLRF 0x86   ;Set PortB as an output
-    BCF 0x0B,0   ;Set INTCON low
+    BCF 0x0B,0  ;Set INTCON low
     BSF 0x03,6
     BCF 0x03,5
     BCF 0x09,1  ;Setting Bit 1 low for CM2CON1
