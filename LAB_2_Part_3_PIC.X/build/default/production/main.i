@@ -2419,8 +2419,8 @@ Setup:
 
  Test0:
         BTFSS 0x06,0 ;Skip next line if ((PORTB) and 07Fh), 0 is set
- GOTO Test0 ;If not ((PORTB) and 07Fh), 0 keep testing
- GOTO Display0 ;If ((PORTB) and 07Fh), 0 display $
+ GOTO DisplayDal ;If not ((PORTB) and 07Fh), 0 Low display $
+ GOTO Display0 ;If ((PORTB) and 07Fh), 0 high display 0
 
  Display7:
         MOVLW 0x37 ;Select the character set for display 7
@@ -2458,9 +2458,13 @@ Setup:
  GOTO Main
 
         Display0:
-        MOVLW 0x24
+        MOVLW 0x30
  MOVWF 0x07
  GOTO Main
+
+ DisplayDal:
+        MOVLW 0x24
+ MOVWF 0x07
 
  GOTO Main
 

@@ -49,7 +49,8 @@ Setup:
     BSF 0x03,5  ;Set Bank 1
     CLRF 0x0B   ;Set INTCON low to remove interrupt flags 
     CLRF 0x87   ;Set PortC as an Output TRISC
-    
+    MOVLW 0xFF  ;Set TRISB high
+    MOVWF 0x86  ;Set PortB as an Input TRISB  
     ;       Bank 2
     ;BSF 0x03,6  ;Set Bank 2
     ;BCF 0x03,5  ;Set Bank 2
@@ -102,49 +103,53 @@ Setup:
 	GOTO Display1  ;If RB1 display 1
 	
 	Test0:
-        BTFSS 0x06,0   ;Skip next line if RB1 is set 
-	GOTO Test0     ;If not RB1 keep testing
-	GOTO Display0  ;If RB1 display 1
+        BTFSS 0x06,0    ;Skip next line if RB0 is set 
+	GOTO DisplayDal ;If not RB0 Low display $
+	GOTO Display0   ;If RB0 high display 0
 	
 	Display7:
         MOVLW 0x37     ;Select the character set for display 7
-	MOVWF 0x07     ;
+	MOVWF 0x07     ;Send W to PortC
 	GOTO Main
 	
         Display6:
-        MOVLW 0x36
-	MOVWF 0x07
+        MOVLW 0x36     ;Select the character set for display 6
+	MOVWF 0x07     ;Send W to PortC
 	GOTO Main
 	
         Display5:
-        MOVLW 0x35
-	MOVWF 0x07
+        MOVLW 0x35     ;Select the character set for display 5
+	MOVWF 0x07     ;Send W to PortC
 	GOTO Main
 	
         Display4:
-        MOVLW 0x34
-	MOVWF 0x07
+        MOVLW 0x34     ;Select the character set for display 4
+	MOVWF 0x07     ;Send W to PortC
 	GOTO Main
 	
         Display3:
-        MOVLW 0x33
-	MOVWF 0x07
+        MOVLW 0x33     ;Select the character set for display 3
+	MOVWF 0x07     ;Send W to PortC
 	GOTO Main
 	
         Display2:
-        MOVLW 0x32
-	MOVWF 0x07
+        MOVLW 0x32     ;Select the character set for display 2
+	MOVWF 0x07     ;Send W to PortC
 	GOTO Main
 	
-        Display1:
-        MOVLW 0x31
-	MOVWF 0x07
+        Display1:    
+        MOVLW 0x31     ;Select the character set for display 1
+	MOVWF 0x07     ;Send W to PortC
 	GOTO Main
 	
         Display0:
-        MOVLW 0x24
-	MOVWF 0x07
+        MOVLW 0x30     ;Select the character set for display 0
+	MOVWF 0x07     ;Send W to PortC
 	GOTO Main
+	
+	DisplayDal:
+        MOVLW 0x24     ;Select the character set for display $
+	MOVWF 0x07     ;Send W to PortC
 	
 	GOTO Main
 	

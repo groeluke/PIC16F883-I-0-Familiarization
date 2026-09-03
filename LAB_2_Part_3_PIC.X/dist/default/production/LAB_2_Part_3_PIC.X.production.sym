@@ -5,23 +5,23 @@ __Hconfig 2009 0 CONFIG 4
 __Lconfig 0 0 CONFIG 4
 __HresetVect 1 0 CODE 0
 __LresetVect 0 0 CODE 0
-__Hcode 49 0 CODE 0
+__Hcode 4B 0 CODE 0
 __Lcode 8 0 CODE 0
-__Hdata 92 0 ABS 0
-__Ldata 92 0 ABS 0
-__Hudata_bank0 92 0 ABS 0
-__Ludata_bank0 92 0 ABS 0
-__Hudata_shr 92 0 ABS 0
-__Ludata_shr 92 0 ABS 0
+__Hdata 96 0 ABS 0
+__Ldata 96 0 ABS 0
+__Hudata_bank0 96 0 ABS 0
+__Ludata_bank0 96 0 ABS 0
+__Hudata_shr 96 0 ABS 0
+__Ludata_shr 96 0 ABS 0
 __H__absolute__ 0 0 ABS 0
 __L__absolute__ 0 0 ABS 0
-__Hedata 92 0 ABS 0
-__Ledata 92 0 ABS 0
-__Hudata 92 0 ABS 0
-__Ludata 92 0 ABS 0
-__Hudata_bank1 92 0 ABS 0
-__Ludata_bank1 92 0 ABS 0
-__Hspace_0 92 0 ABS 0
+__Hedata 96 0 ABS 0
+__Ledata 96 0 ABS 0
+__Hudata 96 0 ABS 0
+__Ludata 96 0 ABS 0
+__Hudata_bank1 96 0 ABS 0
+__Ludata_bank1 96 0 ABS 0
+__Hspace_0 96 0 ABS 0
 __Lspace_0 0 0 ABS 0
 __Hspace_1 0 0 ABS 0
 __Lspace_1 0 0 ABS 0
@@ -29,13 +29,13 @@ __Hspace_3 0 0 ABS 0
 __Lspace_3 0 0 ABS 0
 __Hspace_4 4010 0 ABS 0
 __Lspace_4 0 0 ABS 0
-__Hudata_bank2 92 0 ABS 0
-__Ludata_bank2 92 0 ABS 0
+__Hudata_bank2 96 0 ABS 0
+__Ludata_bank2 96 0 ABS 0
 %segments
 resetVect 0 1 CODE 0 0
-code 10 91 CODE 10 0
+code 10 95 CODE 10 0
 %locals
-build/default/debug/main.o
+build/default/production/main.o
 main.S
 42 8 0 CODE 0
 43 9 0 CODE 0
@@ -101,5 +101,7 @@ main.S
 146 45 0 CODE 0
 147 46 0 CODE 0
 148 47 0 CODE 0
-150 48 0 CODE 0
+151 48 0 CODE 0
+152 49 0 CODE 0
+154 4A 0 CODE 0
 32 0 0 CODE 0
