@@ -2353,29 +2353,114 @@ PSECT code,class=CODE,delta=2
 Setup:
     ; add device setup here
 
-    BCF 0x03,6 ;set bank 0
-    BCF 0x03,5 ;set bank 0
-    CLRF 0x06 ;Setting PortB on reset low
+    ; Bank 0
+    BCF 0x03,6 ;Set Bank 0
+    BCF 0x03,5 ;Set Bank 0
+    CLRF 0x06 ;Setting PortB on reset low known
+    CLRF 0x07 ;Set PortC on reset to LOW
 
-    BCF 0x03,6 ;set bank 1
-    BSF 0x03,5 ;set bank 1
-    CLRF 0x86 ;Set PortB as an output TRISB
+    ; Bank 1
+    BCF 0x03,6 ;Set Bank 1
+    BSF 0x03,5 ;Set Bank 1
+    CLRF 0x0B ;Set INTCON low to remove interrupt flags
+    CLRF 0x87 ;Set PortC as an Output TRISC
 
-    BSF 0x03,6 ;set bank 2
-    BCF 0x03,5 ;set bank 2
-    BSF 0x09,1 ;Setting Bit 1 High for CM2CON1
+    ; Bank 2
+    ;BSF 0x03,6 ;Set Bank 2
+    ;BCF 0x03,5 ;Set Bank 2
 
-    BSF 0x03,6 ;set bank 3
-    BSF 0x03,5 ;set bank 3
-    CLRF 0x89 ;Setting the I/O to digital ANSELH
+    ; Bank 3
+    BSF 0x03,6 ;Set Bank 3
+    BSF 0x03,5 ;Set Bank 3
+    CLRF 0x89 ;Setting the I/O to digital PortB ANSELH
 
     GOTO Main
 
+
     Main:
  ; main code goes here
- BCF 0x03,6 ;set bank 0
-        BCF 0x03,5 ;set bank 0
- INCF 0x06,1 ; increment PortB and place result in PortB
+ BCF 0x03,6 ;Set Bank 0
+ BCF 0x03,5 ;Set Bank 0
+
+ BTFSS 0x06,7 ;Skip next line if ((PORTB) and 07Fh), 7 is set
+ GOTO Test6 ;If not ((PORTB) and 07Fh), 7 keep testing
+ GOTO Display7 ;If ((PORTB) and 07Fh), 7 display 7
+
+ Test6:
+        BTFSS 0x06,6 ;Skip next line if ((PORTB) and 07Fh), 6 is set
+ GOTO Test5 ;If not ((PORTB) and 07Fh), 6 keep testing
+ GOTO Display6 ;If ((PORTB) and 07Fh), 6 display 6
+
+ Test5:
+        BTFSS 0x06,5 ;Skip next line if ((PORTB) and 07Fh), 5 is set
+ GOTO Test4 ;If not ((PORTB) and 07Fh), 5 keep testing
+ GOTO Display5 ;If ((PORTB) and 07Fh), 5 display 5
+
+ Test4:
+        BTFSS 0x06,4 ;Skip next line if ((PORTB) and 07Fh), 4 is set
+ GOTO Test3 ;If not ((PORTB) and 07Fh), 4 keep testing
+ GOTO Display4 ;If ((PORTB) and 07Fh), 4 display 4
+
+ Test3:
+        BTFSS 0x06,3 ;Skip next line if ((PORTB) and 07Fh), 3 is set
+ GOTO Test2 ;If not ((PORTB) and 07Fh), 3 keep testing
+ GOTO Display3 ;If ((PORTB) and 07Fh), 3 display 3
+
+ Test2:
+        BTFSS 0x06,2 ;Skip next line if ((PORTB) and 07Fh), 2 is set
+ GOTO Test1 ;If not ((PORTB) and 07Fh), 2 keep testing
+ GOTO Display2 ;If ((PORTB) and 07Fh), 2 display 2
+
+ Test1:
+        BTFSS 0x06,1 ;Skip next line if ((PORTB) and 07Fh), 1 is set
+ GOTO Test0 ;If not ((PORTB) and 07Fh), 1 keep testing
+ GOTO Display1 ;If ((PORTB) and 07Fh), 1 display 1
+
+ Test0:
+        BTFSS 0x06,0 ;Skip next line if ((PORTB) and 07Fh), 1 is set
+ GOTO Test0 ;If not ((PORTB) and 07Fh), 1 keep testing
+ GOTO Display0 ;If ((PORTB) and 07Fh), 1 display 1
+
+ Display7:
+        MOVLW 0x37 ;Select the character set for display 7
+ MOVWF 0x07 ;
+ GOTO Main
+
+        Display6:
+        MOVLW 0x36
+ MOVWF 0x07
+ GOTO Main
+
+        Display5:
+        MOVLW 0x35
+ MOVWF 0x07
+ GOTO Main
+
+        Display4:
+        MOVLW 0x34
+ MOVWF 0x07
+ GOTO Main
+
+        Display3:
+        MOVLW 0x33
+ MOVWF 0x07
+ GOTO Main
+
+        Display2:
+        MOVLW 0x32
+ MOVWF 0x07
+ GOTO Main
+
+        Display1:
+        MOVLW 0x31
+ MOVWF 0x07
+ GOTO Main
+
+        Display0:
+        MOVLW 0x24
+ MOVWF 0x07
+ GOTO Main
 
  GOTO Main
+
     End
