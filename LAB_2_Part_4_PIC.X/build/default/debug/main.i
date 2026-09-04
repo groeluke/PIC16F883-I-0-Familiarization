@@ -2364,8 +2364,11 @@ Setup:
     BSF 0x03,5 ;Set Bank 1
     CLRF 0x0B ;Set INTCON low to remove interrupt flags
     CLRF 0x87 ;Set PortC as an Output TRISC
-    MOVLW 0xFF ;Set TRISB high
-    MOVWF 0x86 ;Set PortB as an Input TRISB
+    MOVLW 0xF0 ;Make ((PORTB) and 07Fh), 0 -((PORTB) and 07Fh), 3 outputs for the rows and ((PORTB) and 07Fh), 4 -((PORTB) and 07Fh), 7 inputs for the colums
+    MOVWF 0x86 ;Setting PortB I/O
+    BCF 0x81,7 ; Make PortB have weak pull-ups OPTION_REG
+
+
     ; Bank 2
     ;BSF 0x03,6 ;Set Bank 2
     ;BCF 0x03,5 ;Set Bank 2
@@ -2380,92 +2383,254 @@ Setup:
 
     Main:
  ; main code goes here
- BCF 0x03,6 ;Set Bank 0
- BCF 0x03,5 ;Set Bank 0
+ CLRF 0x20 ;Clear register low key is set low
+ CLRF 0x21 ;Clear register high key is set low
 
- BTFSS 0x06,7 ;Skip next line if ((PORTB) and 07Fh), 7 is set
- GOTO Test6 ;If not ((PORTB) and 07Fh), 7 keep testing
- GOTO Display7 ;If ((PORTB) and 07Fh), 7 display 7
+ ; Sacn Row 1 (((PORTB) and 07Fh), 0)
+ BCF 0x03,6 ;Set Bank 1
+ BSF 0x03,5 ;Set Bank 1
+ MOVLW 0xFE ;((PORTB) and 07Fh), 0 output is low, ((PORTB) and 07Fh), 1 -((PORTB) and 07Fh), 7 input
+ MOVWF 0x86 ;Send W to PortB
+        BCF 0x03,6 ;Set Bank 0
+        BCF 0x03,5 ;Set Bank 0
 
- Test6:
-        BTFSS 0x06,6 ;Skip next line if ((PORTB) and 07Fh), 6 is set
- GOTO Test5 ;If not ((PORTB) and 07Fh), 6 keep testing
- GOTO Display6 ;If ((PORTB) and 07Fh), 6 display 6
+        BTFSS 0x06,4 ;Check Column 1 for 1
+        BSF 0x20,1
+        BTFSS 0x06,5 ;Check Column 2 for 2
+        BSF 0x20,2
+        BTFSS 0x06,6 ;Check Column 3 for 3
+        BSF 0x20,3
+        BTFSS 0x06,7 ;Check Column 4 for A
+        BSF 0x21,2
 
- Test5:
-        BTFSS 0x06,5 ;Skip next line if ((PORTB) and 07Fh), 5 is set
- GOTO Test4 ;If not ((PORTB) and 07Fh), 5 keep testing
- GOTO Display5 ;If ((PORTB) and 07Fh), 5 display 5
+        ; Scan Row 2 (((PORTB) and 07Fh), 1)
+        BCF 0x03,6 ;Set Bank 1
+        BSF 0x03,5 ;Set Bank 1
+        MOVLW 0xFD ;((PORTB) and 07Fh), 1 output-low, rest input
+        MOVWF 0x86 ;Send W to PortB
+        BCF 0x03,6 ;Set Bank 0
+        BCF 0x03,5 ;Set Bank 0
 
- Test4:
-        BTFSS 0x06,4 ;Skip next line if ((PORTB) and 07Fh), 4 is set
- GOTO Test3 ;If not ((PORTB) and 07Fh), 4 keep testing
- GOTO Display4 ;If ((PORTB) and 07Fh), 4 display 4
+        BTFSS 0x06,4 ;Check Column 1 for 4
+        BSF 0x20,4
+        BTFSS 0x06,5 ;Check Column 2 for 5
+        BSF 0x20,5
+        BTFSS 0x06,6 ;Check Column 3 for 6
+        BSF 0x20,6
+        BTFSS 0x06,7 ;Check Column 4 for B
+        BSF 0x21,3
 
- Test3:
-        BTFSS 0x06,3 ;Skip next line if ((PORTB) and 07Fh), 3 is set
- GOTO Test2 ;If not ((PORTB) and 07Fh), 3 keep testing
- GOTO Display3 ;If ((PORTB) and 07Fh), 3 display 3
+        ; Scan Row 3 (((PORTB) and 07Fh), 2)
+        BCF 0x03,6 ;Set Bank 1
+        BSF 0x03,5 ;Set Bank 1
+        MOVLW 0xFB ;((PORTB) and 07Fh), 2 output-low, rest input
+        MOVWF 0x86 ;Send W to PortB
+        BCF 0x03,6 ;Set Bank 0
+        BCF 0x03,5 ;Set Bank 0
 
- Test2:
-        BTFSS 0x06,2 ;Skip next line if ((PORTB) and 07Fh), 2 is set
- GOTO Test1 ;If not ((PORTB) and 07Fh), 2 keep testing
- GOTO Display2 ;If ((PORTB) and 07Fh), 2 display 2
+        BTFSS 0x06,4 ;Check Column 1 for 7
+        BSF 0x20,7
+        BTFSS 0x06,5 ;Check Column 2 for 8
+        BSF 0x21,0
+        BTFSS 0x06,6 ;Check Column 3 for 9
+        BSF 0x21,1
+        BTFSS 0x06,7 ;Check Column 4 for C
+        BSF 0x21,4
 
- Test1:
-        BTFSS 0x06,1 ;Skip next line if ((PORTB) and 07Fh), 1 is set
- GOTO Test0 ;If not ((PORTB) and 07Fh), 1 keep testing
- GOTO Display1 ;If ((PORTB) and 07Fh), 1 display 1
+        ; Scan Row 4 (((PORTB) and 07Fh), 3)
+        BCF 0x03,6 ;Set Bank 1
+        BSF 0x03,5 ;Set Bank 1
+        MOVLW 0xF7 ;((PORTB) and 07Fh), 3 output-low, rest input
+        MOVWF 0x86 ;Send W to PortB
+        BCF 0x03,6 ;Set Bank 0
+        BCF 0x03,5 ;Set Bank 0
 
- Test0:
-        BTFSS 0x06,0 ;Skip next line if ((PORTB) and 07Fh), 0 is set
- GOTO DisplayDal ;If not ((PORTB) and 07Fh), 0 Low display $
- GOTO Display0 ;If ((PORTB) and 07Fh), 0 high display 0
+        BTFSS 0x06,4 ;Check Column 1 for *
+        BSF 0x21,6
+        BTFSS 0x06,5 ;Check Column 2 for 0
+        BSF 0x20,0
+        BTFSS 0x06,6 ;Check Column 3 for #
+        BSF 0x21,7
+        BTFSS 0x06,7 ;Check Column 4 for D
+        BSF 0x21,5
 
- Display7:
-        MOVLW 0x37 ;Select the character set for display 7
- MOVWF 0x07 ;Send W to PortC
- GOTO Main
+        ;Set TRIS (all rows Hi-Z) before decoding
+        BCF 0x03,6 ;Set Bank 1
+        BSF 0x03,5 ;Set Bank 1
+        MOVLW 0xF0 ;Set all rows to a High Impedance
+        MOVWF 0x86 ;Send W to PortB
+        BCF 0x03,6 ;Set Bank 0
+        BCF 0x03,5 ;Set Bank 0
 
-        Display6:
-        MOVLW 0x36 ;Select the character set for display 6
- MOVWF 0x07 ;Send W to PortC
- GOTO Main
+        GOTO Decode
 
-        Display5:
-        MOVLW 0x35 ;Select the character set for display 5
- MOVWF 0x07 ;Send W to PortC
- GOTO Main
 
-        Display4:
-        MOVLW 0x34 ;Select the character set for display 4
- MOVWF 0x07 ;Send W to PortC
- GOTO Main
+    Decode:
+    BTFSS 0x21,7 ;Test if # is pressed
+    GOTO TestStar ;GOTO Test for *
+    GOTO DisplayHash;GOTO the Display for #
 
-        Display3:
-        MOVLW 0x33 ;Select the character set for display 3
- MOVWF 0x07 ;Send W to PortC
- GOTO Main
+    TestStar:
+    BTFSS 0x21,6 ;Test if * is pressed
+    GOTO TestD ;GOTO Test for D
+    GOTO DisplayStar;GOTO the Display for *
 
-        Display2:
-        MOVLW 0x32 ;Select the character set for display 2
- MOVWF 0x07 ;Send W to PortC
- GOTO Main
+    TestD:
+    BTFSS 0x21,5 ;Test if D is pressed
+    GOTO TestC ;GOTO Test for C
+    GOTO DisplayD ;GOTO the Display for D
 
-        Display1:
-        MOVLW 0x31 ;Select the character set for display 1
- MOVWF 0x07 ;Send W to PortC
- GOTO Main
+    TestC:
+    BTFSS 0x21,4 ;Test if C is pressed
+    GOTO TestB ;GOTO Test for B
+    GOTO DisplayC ;GOTO the Display for C
 
-        Display0:
-        MOVLW 0x30 ;Select the character set for display 0
- MOVWF 0x07 ;Send W to PortC
- GOTO Main
+    TestB:
+    BTFSS 0x21,3 ;Test if B is pressed
+    GOTO TestA ;GOTO Test for A
+    GOTO DisplayB ;GOTO the Display for B
 
- DisplayDal:
-        MOVLW 0x24 ;Select the character set for display $
- MOVWF 0x07 ;Send W to PortC
+    TestA:
+    BTFSS 0x21,2 ;Test if A is pressed
+    GOTO Test9 ;GOTO Test for 9
+    GOTO DisplayA ;GOTO the Display for A
 
- GOTO Main
+    Test9:
+    BTFSS 0x21,1 ;Test if 9 is pressed
+    GOTO Test8 ;GOTO Test for 8
+    GOTO Display9 ;GOTO the Display for 9
+
+    Test8:
+    BTFSS 0x21,0 ;Test if 8 is pressed
+    GOTO Test7 ;GOTO Test for 7
+    GOTO Display8 ;GOTO the Display for 8
+
+    Test7:
+    BTFSS 0x20,7 ;Test if 7 is pressed
+    GOTO Test6 ;GOTO Test for 6
+    GOTO Display7 ;GOTO the Display for 7
+
+    Test6:
+    BTFSS 0x20,6 ;Test if 6 is pressed
+    GOTO Test5 ;GOTO Test for 5
+    GOTO Display6 ;GOTO the Display for 6
+
+    Test5:
+    BTFSS 0x20,5 ;Test if 5 is pressed
+    GOTO Test4 ;GOTO Test for 4
+    GOTO Display5 ;GOTO the Display for 5
+
+    Test4:
+    BTFSS 0x20,4 ;Test if 4 is pressed
+    GOTO Test3 ;GOTO Test for 3
+    GOTO Display4 ;GOTO the Display for 4
+
+    Test3:
+    BTFSS 0x20,3 ;Test if 3 is pressed
+    GOTO Test2 ;GOTO Test for 2
+    GOTO Display3 ;GOTO the Display for 3
+
+    Test2:
+    BTFSS 0x20,2 ;Test if 2 is pressed
+    GOTO Test1 ;GOTO Test for 1
+    GOTO Display2 ;GOTO the Display for 2
+
+    Test1:
+    BTFSS 0x20,1 ;Test if 1 is pressed
+    GOTO Test0 ;GOTO the Display for 0
+    GOTO Display1 ;GOTO the Display for 1
+
+    Test0:
+    BTFSS 0x20,0 ;Test if 0 is pressed
+    GOTO DisplayDal ;GOTO the Display for $
+    GOTO Display0 ;GOTO the Display for 0
+
+    Display9:
+    MOVLW 0x39 ;Select the character set for display 9
+    MOVWF 0x07 ;Send W to PortC
+    GOTO Main
+
+    Display8:
+    MOVLW 0x38 ;Select the character set for display 8
+    MOVWF 0x07 ;Send W to PortC
+    GOTO Main
+
+    Display7:
+    MOVLW 0x37 ;Select the character set for display 7
+    MOVWF 0x07 ;Send W to PortC
+    GOTO Main
+
+    Display6:
+    MOVLW 0x36 ;Select the character set for display 6
+    MOVWF 0x07 ;Send W to PortC
+    GOTO Main
+
+    Display5:
+    MOVLW 0x35 ;Select the character set for display 5
+    MOVWF 0x07 ;Send W to PortC
+    GOTO Main
+
+    Display4:
+    MOVLW 0x34 ;Select the character set for display 4
+    MOVWF 0x07 ;Send W to PortC
+    GOTO Main
+
+    Display3:
+    MOVLW 0x33 ;Select the character set for display 3
+    MOVWF 0x07 ;Send W to PortC
+    GOTO Main
+
+    Display2:
+    MOVLW 0x32 ;Select the character set for display 2
+    MOVWF 0x07 ;Send W to PortC
+    GOTO Main
+
+    Display1:
+    MOVLW 0x31 ;Select the character set for display 1
+    MOVWF 0x07 ;Send W to PortC
+    GOTO Main
+
+    Display0:
+    MOVLW 0x30 ;Select the character set for display 0
+    MOVWF 0x07 ;Send W to PortC
+    GOTO Main
+
+    DisplayA:
+    MOVLW 0x41 ;Select the character set for display A
+    MOVWF 0x07 ;Send W to PortC
+    GOTO Main
+
+    DisplayB:
+    MOVLW 0x42 ;Select the character set for display B
+    MOVWF 0x07 ;Send W to PortC
+    GOTO Main
+
+    DisplayC:
+    MOVLW 0x43 ;Select the character set for display C
+    MOVWF 0x07 ;Send W to PortC
+    GOTO Main
+
+    DisplayD:
+    MOVLW 0x44 ;Select the character set for display D
+    MOVWF 0x07 ;Send W to PortC
+    GOTO Main
+
+    DisplayStar:
+    MOVLW 0x2A ;Select the character set for display *
+    MOVWF 0x07 ;Send W to PortC
+    GOTO Main
+
+    DisplayHash:
+    MOVLW 0x23 ;Select the character set for display #
+    MOVWF 0x07 ;Send W to PortC
+    GOTO Main
+
+    DisplayDal:
+    MOVLW 0x24 ;Select the character set for display $
+    MOVWF 0x07 ;Send W to PortC
+    GOTO Main
+
+    CLEAR
+    GOTO Main
 
     End
