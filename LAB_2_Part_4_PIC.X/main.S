@@ -138,14 +138,6 @@ Setup:
         BTFSS 0x06,7    ;Check Column 4 for D
         BSF 0x21,5      ;Set test D high if selected
 
-        ;Set TRISB (all rows Hi-Z) before testing 
-        BCF 0x03,6      ;Set Bank 1
-        BSF 0x03,5      ;Set Bank 1
-        MOVLW 0xF0      ;Reset TrisB for all the I/O
-        MOVWF 0x86      ;Send W to PortB
-        BCF 0x03,6      ;Set Bank 0
-        BCF 0x03,5      ;Set Bank 0
-
         GOTO TestHash
 
 
