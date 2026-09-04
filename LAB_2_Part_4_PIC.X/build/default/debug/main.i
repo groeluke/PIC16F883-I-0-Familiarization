@@ -2382,8 +2382,8 @@ Setup:
 
     Main:
  ; main code goes here
- CLRF 0x20 ;Clear register low key is set low
- CLRF 0x21 ;Clear register high key is set low
+ CLRF 0x20 ;Clear register lower keys is set low
+ CLRF 0x21 ;Clear register higher keys is set low
 
  ; Sacn Row 1 (((PORTB) and 07Fh), 0)
  BCF 0x03,6 ;Set Bank 1

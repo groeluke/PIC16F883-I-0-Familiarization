@@ -6,7 +6,7 @@ Linker command line:
   --edf=C:\Program Files\Microchip\xc8\v3.10\pic\dat\20250813170317_en.msgs \
   -cs -h+dist/default/debug\LAB_2_Part_4_PIC.X.debug.sym \
   --cmf=dist/default/debug\LAB_2_Part_4_PIC.X.debug.cmf -z -Q16F883 \
-  -oC:\Users\lukeg\AppData\Local\Temp\xcAsbhc.0\driver_tmp_3.o \
+  -oC:\Users\lukeg\AppData\Local\Temp\xcAs6ik.0\driver_tmp_3.o \
   -presetVect=0000h -pcode=0008h --fixupoverflow=error \
   -ver=XC8 PIC(R) Assembler --fixupoverflow=lstwarn \
   -Mdist/default/debug/LAB_2_Part_4_PIC.X.debug.map -E1 -ACODE=00h-07FFhx2 \

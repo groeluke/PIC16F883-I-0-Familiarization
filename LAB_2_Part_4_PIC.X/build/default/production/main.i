@@ -2382,8 +2382,8 @@ Setup:
 
     Main:
  ; main code goes here
- CLRF 0x20 ;Clear register low key is set low
- CLRF 0x21 ;Clear register high key is set low
+ CLRF 0x20 ;Clear register lower keys is set low
+ CLRF 0x21 ;Clear register higher keys is set low
 
  ; Sacn Row 1 (((PORTB) and 07Fh), 0)
  BCF 0x03,6 ;Set Bank 1
@@ -2453,10 +2453,10 @@ Setup:
         BTFSS 0x06,7 ;Check Column 4 for D
         BSF 0x21,5 ;Set test D high if selected
 
-        ;Set TRIS (all rows Hi-Z) before decoding
+        ;Set TRISB (all rows Hi-Z) before testing
         BCF 0x03,6 ;Set Bank 1
         BSF 0x03,5 ;Set Bank 1
-        MOVLW 0xF0 ;Set all rows to a High Impedance
+        MOVLW 0xF0 ;Reset TrisB for all the I/O
         MOVWF 0x86 ;Send W to PortB
         BCF 0x03,6 ;Set Bank 0
         BCF 0x03,5 ;Set Bank 0
@@ -2544,6 +2544,41 @@ Setup:
     GOTO DisplayDal ;GOTO the Display for $
     GOTO Display0 ;GOTO the Display for 0
 
+    DisplayDal:
+    MOVLW 0x24 ;Select the character set for display $ or whatever
+    MOVWF 0x07 ;Send W to PortC
+    GOTO Main
+
+    DisplayHash:
+    MOVLW 0x23 ;Select the character set for display #
+    MOVWF 0x07 ;Send W to PortC
+    GOTO Main
+
+    DisplayStar:
+    MOVLW 0x2A ;Select the character set for display *
+    MOVWF 0x07 ;Send W to PortC
+    GOTO Main
+
+    DisplayD:
+    MOVLW 0x44 ;Select the character set for display D
+    MOVWF 0x07 ;Send W to PortC
+    GOTO Main
+
+    DisplayC:
+    MOVLW 0x43 ;Select the character set for display C
+    MOVWF 0x07 ;Send W to PortC
+    GOTO Main
+
+    DisplayB:
+    MOVLW 0x42 ;Select the character set for display B
+    MOVWF 0x07 ;Send W to PortC
+    GOTO Main
+
+    DisplayA:
+    MOVLW 0x41 ;Select the character set for display A
+    MOVWF 0x07 ;Send W to PortC
+    GOTO Main
+
     Display9:
     MOVLW 0x39 ;Select the character set for display 9
     MOVWF 0x07 ;Send W to PortC
@@ -2591,41 +2626,6 @@ Setup:
 
     Display0:
     MOVLW 0x30 ;Select the character set for display 0
-    MOVWF 0x07 ;Send W to PortC
-    GOTO Main
-
-    DisplayA:
-    MOVLW 0x41 ;Select the character set for display A
-    MOVWF 0x07 ;Send W to PortC
-    GOTO Main
-
-    DisplayB:
-    MOVLW 0x42 ;Select the character set for display B
-    MOVWF 0x07 ;Send W to PortC
-    GOTO Main
-
-    DisplayC:
-    MOVLW 0x43 ;Select the character set for display C
-    MOVWF 0x07 ;Send W to PortC
-    GOTO Main
-
-    DisplayD:
-    MOVLW 0x44 ;Select the character set for display D
-    MOVWF 0x07 ;Send W to PortC
-    GOTO Main
-
-    DisplayStar:
-    MOVLW 0x2A ;Select the character set for display *
-    MOVWF 0x07 ;Send W to PortC
-    GOTO Main
-
-    DisplayHash:
-    MOVLW 0x23 ;Select the character set for display #
-    MOVWF 0x07 ;Send W to PortC
-    GOTO Main
-
-    DisplayDal:
-    MOVLW 0x24 ;Select the character set for display $ or whatever
     MOVWF 0x07 ;Send W to PortC
     GOTO Main
 
